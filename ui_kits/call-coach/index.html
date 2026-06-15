@@ -1110,54 +1110,6 @@ function Subtitle({ setTab, onCall }) {
   );
 }
 
-/* ---------- dev navigator ---------- */
-const SCREENS = [
-  ['splash','🚀 Splash'],
-  ['onboarding','📋 온보딩'],
-  ['login','🔐 로그인'],
-  ['home','🏠 홈'],
-  ['settings','⚙️ 설정'],
-  ['mypage','👤 마이페이지'],
-  ['calling','📞 통화 중'],
-  ['analyzing','🔍 AI 분석 중'],
-  ['complete','✅ 분석 완료'],
-  ['aireport','📊 AI 리포트'],
-  ['report:종합','📈 리포트 · 종합'],
-  ['report:감정','❤️ 리포트 · 감정'],
-  ['report:표현','💬 리포트 · 표현'],
-  ['report:흐름','🌊 리포트 · 흐름'],
-  ['tab:emotion','😌 감정 기록'],
-  ['tab:subtitle','📝 자막'],
-  ['tab:review','🔄 돌아보기'],
-  ['chat','🤖 AI 코치'],
-];
-
-function DevNav({ current, onGo }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div style={{position:'fixed',bottom:24,right:24,zIndex:9999,fontFamily:'system-ui'}}>
-      {open && (
-        <div style={{position:'absolute',bottom:52,right:0,width:200,background:'rgba(17,24,39,.96)',backdropFilter:'blur(8px)',borderRadius:14,padding:'8px 0',boxShadow:'0 8px 32px rgba(0,0,0,.4)',maxHeight:460,overflowY:'auto'}}>
-          {SCREENS.map(([key,label])=>(
-            <button key={key} onClick={()=>{onGo(key);setOpen(false);}}
-              style={{display:'block',width:'100%',border:'none',background: current===key?'rgba(255,54,57,.3)':'transparent',
-                color: current===key?'#FF6363':'rgba(255,255,255,.85)',textAlign:'left',
-                padding:'9px 16px',fontSize:13,fontWeight:current===key?700:400,cursor:'pointer'}}>
-              {label}
-            </button>
-          ))}
-        </div>
-      )}
-      <button onClick={()=>setOpen(o=>!o)}
-        style={{width:44,height:44,borderRadius:'50%',border:'none',background:'rgba(17,24,39,.9)',
-          color:'#fff',fontSize:20,cursor:'pointer',boxShadow:'0 4px 16px rgba(0,0,0,.4)',
-          display:'flex',alignItems:'center',justifyContent:'center'}}>
-        {open ? '✕' : '☰'}
-      </button>
-    </div>
-  );
-}
-
 /* ---------- app shell ---------- */
 function App() {
   const [route,setRoute]=useState('splash');
@@ -1166,14 +1118,6 @@ function App() {
 
   const go=r=>setRoute(r);
   const navTo=t=>{ setTab(t); if(route!=='home') go('home'); };
-
-  const devGo=(key)=>{
-    if(key.startsWith('tab:')){ const t=key.slice(4); setTab(t); go('home'); }
-    else if(key.startsWith('report:')){ const t=key.slice(7); setReportTab(t); go('report'); }
-    else go(key);
-  };
-
-  const devCurrent = route==='home' ? `tab:${tab}` : route.startsWith('report') ? `report:${reportTab}` : route;
 
   let view;
   if(route==='splash') view=<Splash onDone={()=>go('onboarding')}/>;
@@ -1193,12 +1137,7 @@ function App() {
     else if(tab==='subtitle') view=<Subtitle setTab={navTo} onCall={()=>go('calling')}/>;
     else view=<Review setTab={navTo} onCall={()=>go('calling')} onSummary={()=>go('analyzing')} onChat={()=>go('chat')}/>;
   }
-  return (
-    <>
-      <div className="device">{view}</div>
-      <DevNav current={devCurrent} onGo={devGo}/>
-    </>
-  );
+  return <div className="device">{view}</div>;
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);

@@ -117,16 +117,16 @@ function OnboardPermission({ step, icon, title, body, onNext }) {
     <div className="screen fade">
       <StatusBar/>
       <Dots active={step}/>
-      <div className="scroll" style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:'0 32px',gap:26}}>
-        <div style={{width:200,height:200,borderRadius:'50%',background:'var(--red-50)',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--color-primary)'}}>{icon}</div>
+      <div className="scroll" style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:'0 32px 40px',gap:28}}>
+        <div style={{width:180,height:180,borderRadius:'50%',background:'var(--red-50)',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--color-primary)'}}>{icon}</div>
         <div style={{textAlign:'center'}}>
-          <div style={{fontSize:26,fontWeight:700,color:'var(--text-strong)'}}>{title}</div>
-          <p style={{fontSize:17,color:'var(--text-body)',lineHeight:1.55,marginTop:14}}>{body}</p>
+          <div style={{fontSize:28,fontWeight:800,color:'var(--text-strong)'}}>{title}</div>
+          <p style={{fontSize:17,color:'var(--text-body)',lineHeight:1.6,marginTop:16}}>{body}</p>
         </div>
       </div>
-      <div style={{padding:'0 22px 28px',display:'flex',flexDirection:'column',gap:18,alignItems:'center'}}>
+      <div style={{padding:'0 22px 44px',display:'flex',flexDirection:'column',gap:20,alignItems:'center',flexShrink:0}}>
         <CTAButton onClick={onNext}>권한 허용하기</CTAButton>
-        <button onClick={onNext} style={{border:'none',background:'none',fontSize:15,fontWeight:600,color:'var(--text-muted)'}}>건너뛰기</button>
+        <button onClick={onNext} style={{border:'none',background:'none',fontSize:16,fontWeight:600,color:'var(--text-muted)'}}>건너뛰기</button>
       </div>
     </div>
   );
@@ -148,21 +148,21 @@ function OnboardFeatures({ onDone }) {
     <div className="screen fade">
       <StatusBar/>
       <Dots active={3}/>
-      <div className="scroll" style={{display:'flex',flexDirection:'column',justifyContent:'center',padding:'0 22px'}}>
-        <div style={{fontSize:26,fontWeight:800,color:'var(--text-strong)',marginBottom:26}}>이런 기능을 제공해요!</div>
-        <div style={{display:'flex',flexDirection:'column',gap:14}}>
+      <div className="scroll" style={{display:'flex',flexDirection:'column',justifyContent:'center',padding:'0 24px 40px'}}>
+        <div style={{fontSize:28,fontWeight:800,color:'var(--text-strong)',marginBottom:32}}>이런 기능을 제공해요!</div>
+        <div style={{display:'flex',flexDirection:'column',gap:16}}>
           {FEATURES.map(([k,t,d])=>(
-            <div key={k} style={{display:'flex',alignItems:'center',gap:14,padding:'16px 18px',borderRadius:'var(--radius-pill)',background:'#fff',boxShadow:'inset 0 0 0 1.5px var(--red-200)'}}>
-              <div style={{width:48,height:48,borderRadius:12,background:'var(--surface-muted)',color:'var(--color-primary)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>{FEAT_ICON[k]}</div>
+            <div key={k} style={{display:'flex',alignItems:'center',gap:16,padding:'18px 20px',borderRadius:'var(--radius-pill)',background:'#fff',boxShadow:'inset 0 0 0 1.5px var(--red-200)'}}>
+              <div style={{width:52,height:52,borderRadius:14,background:'var(--surface-muted)',color:'var(--color-primary)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>{FEAT_ICON[k]}</div>
               <div>
                 <div style={{fontSize:17,fontWeight:700,color:'var(--text-strong)'}}>{t}</div>
-                <div style={{fontSize:15,color:'var(--text-body)',marginTop:2}}>{d}</div>
+                <div style={{fontSize:15,color:'var(--text-body)',marginTop:3}}>{d}</div>
               </div>
             </div>
           ))}
         </div>
       </div>
-      <div style={{padding:'0 22px 28px'}}>
+      <div style={{padding:'0 22px 44px',flexShrink:0}}>
         <CTAButton onClick={onDone}>시작하기</CTAButton>
       </div>
     </div>
@@ -176,18 +176,18 @@ function Onboarding({ onDone }) {
     <div className="screen fade">
       <StatusBar/>
       <Dots active={0}/>
-      <div className="scroll" style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:'0 32px',gap:22}}>
-        <div style={{width:200,height:200,borderRadius:'50%',background:'var(--red-50)',display:'flex',alignItems:'center',justifyContent:'center'}}>
-          <img src={"../../assets/mascot-head-happy.png"} style={{width:'72%'}}/>
+      <div className="scroll" style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:'0 32px 40px',gap:28}}>
+        <div style={{width:180,height:180,borderRadius:'50%',background:'var(--red-50)',display:'flex',alignItems:'center',justifyContent:'center'}}>
+          <img src={"../../assets/mascot-head-happy.png"} style={{width:'76%'}}/>
         </div>
         <div style={{textAlign:'center'}}>
-          <div style={{fontSize:26,fontWeight:700,color:'var(--text-strong)'}}>안녕하세요!</div>
-          <p style={{fontSize:18,color:'var(--text-body)',lineHeight:1.5,marginTop:14}}>AI가 당신의 통화를 분석하고<br/>더 나은 대화를 도와드립니다.</p>
+          <div style={{fontSize:28,fontWeight:800,color:'var(--text-strong)'}}>안녕하세요!</div>
+          <p style={{fontSize:17,color:'var(--text-body)',lineHeight:1.6,marginTop:16}}>AI가 당신의 통화를 분석하고<br/>더 나은 대화를 도와드립니다.</p>
         </div>
       </div>
-      <div style={{padding:'0 22px 28px',display:'flex',flexDirection:'column',gap:16,alignItems:'center'}}>
+      <div style={{padding:'0 22px 44px',display:'flex',flexDirection:'column',gap:20,alignItems:'center',flexShrink:0}}>
         <CTAButton onClick={next}>다음</CTAButton>
-        <span style={{fontSize:14,fontWeight:600,color:'var(--text-muted)'}}>서비스 이용약관 · 개인정보처리방침</span>
+        <span style={{fontSize:15,fontWeight:600,color:'var(--text-muted)'}}>서비스 이용약관 · 개인정보처리방침</span>
       </div>
     </div>
   );
@@ -972,14 +972,14 @@ function CompleteSheet({ onFeedback, onLater, onCall, setTab }) {
 function Splash({ onDone }) {
   useEffect(()=>{ const t=setTimeout(onDone, 2200); return ()=>clearTimeout(t); },[]);
   return (
-    <div className="screen" style={{background:'#FF4044'}}>
+    <div className="screen" style={{background:'#FF3C3C'}}>
       <StatusBar onBrand/>
       <div style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',position:'relative'}}>
         <div style={{animation:'splashPop .6s var(--ease-out) both'}}>
-          <img src={"../../assets/mascot-head-happy.png"} style={{width:230,filter:'drop-shadow(0 26px 30px rgba(120,0,0,.35))'}}/>
+          <img src={"../../assets/mascot-happy.png"} style={{width:300,filter:'drop-shadow(0 32px 40px rgba(120,0,0,.3))'}}/>
         </div>
       </div>
-      <div style={{display:'flex',justifyContent:'center',paddingBottom:96,animation:'splashFade .7s .25s var(--ease-out) both'}}>
+      <div style={{display:'flex',justifyContent:'center',paddingBottom:100,animation:'splashFade .7s .25s var(--ease-out) both'}}>
         <Wordmark/>
       </div>
       <style>{`@keyframes splashPop{0%{opacity:0;transform:scale(.78)}60%{transform:scale(1.04)}100%{opacity:1;transform:scale(1)}}@keyframes splashFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}`}</style>

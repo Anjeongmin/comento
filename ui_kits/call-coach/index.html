@@ -7,8 +7,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="hidden" />
+<meta name="apple-mobile-web-app-title" content="comento" />
 <meta name="mobile-web-app-capable" content="yes" />
-<title>AI 통화 분석 · Call Coach</title>
+<meta name="application-name" content="comento" />
+<meta name="theme-color" content="#FF3639" />
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="../../assets/app-icon-180.png" />
+<title>comento</title>
 <link rel="stylesheet" href="../../styles.css" />
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -242,7 +247,7 @@ function ListRow({ icon, iconColor='var(--color-primary)', title, sub, right, la
 function Avatar({ size=120, camera=true }) {
   return (
     <div style={{position:'relative',width:size,height:size,flexShrink:0}}>
-      <div style={{width:size,height:size,borderRadius:'50%',background:'var(--surface-muted)',display:'flex',alignItems:'center',justifyContent:'center',overflow:'hidden'}}><img src={"../../assets/mascot-head-happy.png"} style={{width:'82%'}}/></div>
+      <div style={{width:size,height:size,borderRadius:'50%',background:'var(--surface-muted)',display:'flex',alignItems:'center',justifyContent:'center',overflow:'hidden'}}><img src={"../../assets/avatar-default.png"} style={{width:'100%',objectFit:'cover'}}/></div>
       {camera && <div style={{position:'absolute',right:4,bottom:4,width:34,height:34,borderRadius:'50%',background:'var(--color-primary)',border:'3px solid #fff',display:'flex',alignItems:'center',justifyContent:'center',color:'#fff'}}><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 8a2 2 0 012-2h2l1.2-1.6A1 1 0 019 4h6a1 1 0 01.8.4L17 6h2a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/><circle cx="12" cy="12.5" r="3" stroke="currentColor" strokeWidth="2"/></svg></div>}
     </div>
   );
@@ -340,11 +345,11 @@ function Home({ setTab, onCall, onReport, onSettings, onMyPage }) {
       <StatusBar/>
       <div className="scroll">
         <div style={{padding:'4px 22px 0',display:'flex',justifyContent:'flex-end',alignItems:'center',gap:10}}>
-          <button onClick={onMyPage} style={{border:'none',padding:0,width:38,height:38,borderRadius:'50%',background:'var(--red-50)',display:'flex',alignItems:'center',justifyContent:'center',overflow:'hidden'}}><img src={"../../assets/mascot-head-happy.png"} style={{width:'82%'}}/></button>
+          <button onClick={onMyPage} style={{border:'none',padding:0,width:38,height:38,borderRadius:'50%',background:'var(--red-50)',display:'flex',alignItems:'center',justifyContent:'center',overflow:'hidden'}}><img src={"../../assets/avatar-default.png"} style={{width:'100%',height:'100%',objectFit:'cover'}}/></button>
           <button onClick={onSettings} style={{border:'none',background:'var(--surface-subtle)',width:38,height:38,borderRadius:'50%',boxShadow:'var(--ring-subtle)',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--gray-700)'}}>{I.settings()}</button>
         </div>
         <div style={{padding:'2px 22px 16px',display:'flex',alignItems:'center',gap:14}}>
-          <div style={{width:54,height:54,borderRadius:'50%',background:'var(--surface-muted)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0,overflow:'hidden'}}><img src={"../../assets/mascot-head-happy.png"} style={{width:'80%'}}/></div>
+          <div style={{width:54,height:54,borderRadius:'50%',background:'var(--surface-muted)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0,overflow:'hidden'}}><img src={"../../assets/avatar-default.png"} style={{width:'100%',height:'100%',objectFit:'cover'}}/></div>
           <div>
             <div style={{fontSize:16,fontWeight:700,color:'var(--text-secondary)'}}>좋은 하루 되세요!</div>
             <div style={{fontSize:22,fontWeight:800,color:'var(--text-strong)'}}>안녕하세요, 김지원님</div>
@@ -379,7 +384,7 @@ function Home({ setTab, onCall, onReport, onSettings, onMyPage }) {
         <div style={{padding:'24px 22px 0'}}>
           <div style={{fontSize:18,fontWeight:700,color:'var(--text-strong)',marginBottom:14}}>AI 피드백</div>
           <div style={{display:'flex',gap:12,padding:16,borderRadius:'var(--radius-xl)',background:'#fff',boxShadow:'var(--shadow-card-hairline)'}}>
-            <div style={{width:44,height:44,borderRadius:'50%',background:'var(--surface-muted)',flexShrink:0,display:'flex',alignItems:'center',justifyContent:'center',overflow:'hidden'}}><img src={"../../assets/mascot-head-happy.png"} style={{width:'82%'}}/></div>
+            <div style={{width:44,height:44,borderRadius:'50%',background:'var(--surface-muted)',flexShrink:0,display:'flex',alignItems:'center',justifyContent:'center',overflow:'hidden'}}><img src={"../../assets/avatar-default.png"} style={{width:'100%',height:'100%',objectFit:'cover'}}/></div>
             <div>
               <div style={{fontSize:17,fontWeight:700,color:'var(--text-strong)'}}>대화 팁: 신뢰도를 높이는 마무리</div>
               <p style={{fontSize:15,color:'var(--text-body)',lineHeight:1.5,margin:'4px 0 0'}}>통화 마무리 시 다음 일정을 한 번 더 확인하면 상대방의 기억에 명확히 남고 신뢰도를 크게 높일 수 있습니다.</p>
@@ -1034,6 +1039,8 @@ function Splash({ onDone }) {
         const t=now-t0;
         ctx.clearRect(0,0,W,H);
         bgCtx.clearRect(0,0,bgEl.width,bgEl.height);
+        bgCtx.fillStyle='#FF3639';
+        bgCtx.fillRect(0,0,bgEl.width,bgEl.height);
 
         // background glow
         if(t>T_BURST && t<T_BURST+700){
@@ -1143,7 +1150,7 @@ function Splash({ onDone }) {
   },[]);
 
   return (
-    <div className="screen" style={{background:'#080c0a',overflow:'hidden'}}>
+    <div className="screen" style={{background:'#FF3639',overflow:'hidden'}}>
       <canvas ref={bgRef} style={{position:'absolute',inset:0,width:'100%',height:'100%',pointerEvents:'none'}}/>
       <div style={{position:'absolute',inset:0,display:'flex',alignItems:'center',justifyContent:'center'}}>
         <div style={{position:'relative',width:300,height:360}}>

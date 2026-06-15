@@ -1,0 +1,24 @@
+{
+  "name": "comento",
+  "short_name": "comento",
+  "description": "AI 통화 코치",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FF3639",
+  "theme_color": "#FF3639",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "../../assets/app-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "../../assets/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

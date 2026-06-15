@@ -961,19 +961,199 @@ function CompleteSheet({ onFeedback, onLater, onCall, setTab }) {
 }
 
 function Splash({ onDone }) {
-  useEffect(()=>{ const t=setTimeout(onDone, 2200); return ()=>clearTimeout(t); },[]);
+  const bgRef = useRef(null);
+  const mainRef = useRef(null);
+  const wmarkRef = useRef(null);
+
+  useEffect(() => {
+    const bgEl = bgRef.current, mainEl = mainRef.current, wmark = wmarkRef.current;
+    if (!bgEl || !mainEl || !wmark) return;
+
+    bgEl.width = window.innerWidth;
+    bgEl.height = window.innerHeight;
+    const bgCtx = bgEl.getContext('2d');
+    const ctx = mainEl.getContext('2d');
+
+    const W = 300, H = 360, CX = 150, CY = 180;
+    const SZ = 200; // mascot draw size
+
+    function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+    function lerp(a,b,t){return a+(b-a)*t;}
+    function easeOutBack(t){const c=2.70158;return 1+c*Math.pow(t-1,3)+(c-1)*Math.pow(t-1,2);}
+    function easeOutExpo(t){return t===1?1:1-Math.pow(2,-10*t);}
+    function easeOutQuart(t){return 1-Math.pow(1-t,4);}
+
+    const charImg = new Image(), logoImg = new Image();
+    charImg.src = '../../assets/mascot-happy.png';
+    logoImg.src = '../../assets/mascot-head-happy.png';
+
+    let animId = null, pieces = [], sparks = [], shockwave = null;
+    const failsafe = setTimeout(onDone, 3500);
+
+    function buildPieces() {
+      const oc = document.createElement('canvas');
+      oc.width = SZ; oc.height = SZ;
+      oc.getContext('2d').drawImage(charImg, 0, 0, SZ, SZ);
+      pieces = [];
+      const COLS=5, ROWS=5, pw=SZ/COLS, ph=SZ/ROWS;
+      for(let r=0;r<ROWS;r++) for(let c=0;c<COLS;c++){
+        const sx=c*pw, sy=r*ph;
+        const pcx=sx+pw/2-SZ/2, pcy=sy+ph/2-SZ/2;
+        const dist=Math.sqrt(pcx*pcx+pcy*pcy)+1;
+        const spd=2.8+Math.random()*5;
+        pieces.push({img:oc,sx,sy,sw:pw,sh:ph,
+          x:CX-SZ/2+sx+pw/2, y:CY-SZ/2+sy+ph/2,
+          vx:(pcx/dist)*spd+(Math.random()-.5)*2,
+          vy:(pcy/dist)*spd-Math.random()*3.5,
+          rot:0, rotV:(Math.random()-.5)*0.4, alpha:1, pw, ph});
+      }
+    }
+
+    function buildSparks() {
+      const cols=['#FF3639','#FF6363','#FFD23F','#FF8C8D','#FF1C1F','#FABC27','#fff'];
+      for(let i=0;i<72;i++){
+        const a=Math.random()*Math.PI*2, s=1.5+Math.random()*7.5;
+        sparks.push({x:CX,y:CY,vx:Math.cos(a)*s,vy:Math.sin(a)*s-Math.random()*3,
+          r:1+Math.random()*3,color:cols[Math.floor(Math.random()*cols.length)],
+          life:1, decay:0.016+Math.random()*0.024});
+      }
+    }
+
+    function run() {
+      pieces=[]; sparks=[]; shockwave=null;
+      ctx.clearRect(0,0,W,H);
+      bgCtx.clearRect(0,0,bgEl.width,bgEl.height);
+      wmark.style.opacity='0';
+
+      const T_APPEAR_END=550, T_BURST=820, T_LOGO_IN=900, T_LOGO_END=1280;
+      const T_NAME_IN=1200, T_NAME_END=1650, TOTAL=2700;
+      let burstDone=false;
+      const t0=performance.now();
+
+      function frame(now) {
+        const t=now-t0;
+        ctx.clearRect(0,0,W,H);
+        bgCtx.clearRect(0,0,bgEl.width,bgEl.height);
+
+        // background glow
+        if(t>T_BURST && t<T_BURST+700){
+          const gp=clamp((t-T_BURST)/500,0,1), peak=Math.sin(gp*Math.PI);
+          const bx=bgEl.width/2, by=bgEl.height/2;
+          const gr=bgCtx.createRadialGradient(bx,by,0,bx,by,220*peak+60);
+          gr.addColorStop(0,`rgba(255,54,57,${.24*peak})`);
+          gr.addColorStop(.5,`rgba(255,180,50,${.08*peak})`);
+          gr.addColorStop(1,'rgba(0,0,0,0)');
+          bgCtx.fillStyle=gr; bgCtx.fillRect(0,0,bgEl.width,bgEl.height);
+        }
+
+        // shockwave
+        if(shockwave){
+          shockwave.r+=16; shockwave.life-=.055;
+          if(shockwave.life>0){
+            const bx=bgEl.width/2, by=bgEl.height/2;
+            bgCtx.save(); bgCtx.beginPath();
+            bgCtx.arc(bx,by,shockwave.r,0,Math.PI*2);
+            bgCtx.strokeStyle=`rgba(255,54,57,${shockwave.life*.55})`;
+            bgCtx.lineWidth=shockwave.life*10; bgCtx.stroke(); bgCtx.restore();
+          } else shockwave=null;
+        }
+
+        // phase 1: char appears
+        if(t<T_APPEAR_END){
+          const p=clamp(t/T_APPEAR_END,0,1), sc=easeOutBack(p);
+          ctx.save(); ctx.globalAlpha=clamp(p*2.5,0,1);
+          ctx.translate(CX,CY); ctx.scale(lerp(.4,1,sc),lerp(.4,1,sc));
+          ctx.drawImage(charImg,-SZ/2,-SZ/2,SZ,SZ); ctx.restore();
+        }
+
+        // phase 1.5: wobble/charge
+        if(t>=T_APPEAR_END && t<T_BURST){
+          const p=(t-T_APPEAR_END)/(T_BURST-T_APPEAR_END);
+          const w=Math.sin(p*Math.PI*5)*.07*(1-p);
+          ctx.save(); ctx.translate(CX,CY); ctx.scale(1-w,1+w);
+          ctx.drawImage(charImg,-SZ/2,-SZ/2,SZ,SZ); ctx.restore();
+          if(p>.4){
+            const gp=(p-.4)/.6, bx=bgEl.width/2, by=bgEl.height/2;
+            const gr=bgCtx.createRadialGradient(bx,by,0,bx,by,90*gp);
+            gr.addColorStop(0,`rgba(255,100,50,${.18*gp})`);
+            gr.addColorStop(1,'rgba(0,0,0,0)');
+            bgCtx.fillStyle=gr; bgCtx.fillRect(0,0,bgEl.width,bgEl.height);
+          }
+        }
+
+        // burst trigger
+        if(t>=T_BURST && !burstDone){
+          burstDone=true; buildPieces(); buildSparks();
+          shockwave={r:12,life:1};
+        }
+
+        // phase 2: fragments + sparks
+        if(burstDone){
+          const el=t-T_BURST;
+          pieces.forEach(p=>{
+            p.x+=p.vx; p.y+=p.vy; p.vy+=.22; p.vx*=.96;
+            p.rot+=p.rotV; p.alpha=clamp(1-el/400,0,1);
+            if(p.alpha<=0) return;
+            ctx.save(); ctx.globalAlpha=p.alpha;
+            ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+            ctx.drawImage(p.img,p.sx,p.sy,p.sw,p.sh,-p.pw/2,-p.ph/2,p.pw,p.ph);
+            ctx.restore();
+          });
+          sparks=sparks.filter(s=>s.life>0);
+          sparks.forEach(s=>{
+            s.x+=s.vx; s.y+=s.vy; s.vy+=.13; s.vx*=.97; s.life-=s.decay;
+            if(s.life<=0) return;
+            ctx.save(); ctx.globalAlpha=s.life;
+            ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+            ctx.fillStyle=s.color; ctx.fill(); ctx.restore();
+          });
+        }
+
+        // phase 3: logo assembles
+        if(t>=T_LOGO_IN){
+          const p=clamp((t-T_LOGO_IN)/(T_LOGO_END-T_LOGO_IN),0,1);
+          const sc=easeOutBack(p), al=easeOutExpo(p);
+          const ry=lerp(0,-22,easeOutExpo(clamp((t-T_LOGO_IN)/800,0,1)));
+          ctx.save(); ctx.globalAlpha=al;
+          ctx.translate(CX,CY+ry); ctx.scale(sc,sc);
+          ctx.beginPath(); ctx.arc(0,0,52,0,Math.PI*2);
+          ctx.fillStyle='rgba(255,54,57,.2)'; ctx.fill();
+          ctx.drawImage(logoImg,-44,-44,88,88);
+          ctx.restore();
+        }
+
+        // phase 4: wordmark
+        if(t>=T_NAME_IN){
+          const p=clamp((t-T_NAME_IN)/(T_NAME_END-T_NAME_IN),0,1);
+          wmark.style.opacity=String(easeOutQuart(p));
+        }
+
+        if(t<TOTAL){ animId=requestAnimationFrame(frame); }
+        else{ clearTimeout(failsafe); onDone(); }
+      }
+      animId=requestAnimationFrame(frame);
+    }
+
+    let loaded=0;
+    const onLoad=()=>{ if(++loaded>=2) setTimeout(run,80); };
+    charImg.complete ? onLoad() : (charImg.onload=charImg.onerror=onLoad);
+    logoImg.complete ? onLoad() : (logoImg.onload=logoImg.onerror=onLoad);
+
+    return ()=>{ clearTimeout(failsafe); if(animId) cancelAnimationFrame(animId); };
+  },[]);
+
   return (
-    <div className="screen" style={{background:'#FF3C3C'}}>
-      <StatusBar onBrand/>
-      <div style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',position:'relative'}}>
-        <div style={{animation:'splashPop .6s var(--ease-out) both'}}>
-          <img src={"../../assets/mascot-happy.png"} style={{width:300,filter:'drop-shadow(0 32px 40px rgba(120,0,0,.3))'}}/>
+    <div className="screen" style={{background:'#080c0a',overflow:'hidden'}}>
+      <canvas ref={bgRef} style={{position:'absolute',inset:0,width:'100%',height:'100%',pointerEvents:'none'}}/>
+      <div style={{position:'absolute',inset:0,display:'flex',alignItems:'center',justifyContent:'center'}}>
+        <div style={{position:'relative',width:300,height:360}}>
+          <canvas ref={mainRef} width={300} height={360} style={{position:'absolute',inset:0}}/>
+          <div ref={wmarkRef} style={{position:'absolute',bottom:-76,left:'50%',transform:'translateX(-50%)',display:'flex',flexDirection:'column',alignItems:'center',gap:6,opacity:0,pointerEvents:'none',whiteSpace:'nowrap'}}>
+            <Wordmark/>
+            <span style={{fontFamily:'var(--font-sans)',fontSize:12,fontWeight:500,letterSpacing:'.22em',color:'rgba(255,255,255,.45)',textTransform:'uppercase'}}>AI 통화 코치</span>
+          </div>
         </div>
       </div>
-      <div style={{display:'flex',justifyContent:'center',paddingBottom:100,animation:'splashFade .7s .25s var(--ease-out) both'}}>
-        <Wordmark/>
-      </div>
-      <style>{`@keyframes splashPop{0%{opacity:0;transform:scale(.78)}60%{transform:scale(1.04)}100%{opacity:1;transform:scale(1)}}@keyframes splashFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}`}</style>
     </div>
   );
 }

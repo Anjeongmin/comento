@@ -1,0 +1,36 @@
+<!-- @dsCard group="Brand" viewport="700x200" name="Iconography" subtitle="2px line icons · 24px grid · social marks" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; font-family: var(--font-sans); background: #fff; padding: 24px; color: var(--gray-700); }
+  .row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .tile { width: 56px; height: 56px; border-radius: 12px; background: var(--surface-muted); display: flex; align-items: center; justify-content: center; color: var(--color-primary); }
+  .sep { width: 1px; height: 40px; background: var(--border-default); margin: 0 6px; }
+  .soc { width: 44px; height: 44px; border-radius: 50%; display:flex; align-items:center; justify-content:center; }
+  svg { display: block; }
+  .cap { margin-top: 16px; font-size: 12px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <!-- phone -->
+    <div class="tile"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8a13 13 0 006.6 6.6l2.2-2.2a1 1 0 011-.24c1.1.37 2.3.57 3.5.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.3a1 1 0 011 1c0 1.2.2 2.4.57 3.5a1 1 0 01-.24 1l-2.2 2.3z" fill="currentColor"/></svg></div>
+    <!-- mic -->
+    <div class="tile"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/><path d="M5 11a7 7 0 0014 0M12 18v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+    <!-- share -->
+    <div class="tile"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="6" cy="12" r="2.4" fill="currentColor"/><circle cx="18" cy="6" r="2.4" fill="currentColor"/><circle cx="18" cy="18" r="2.4" fill="currentColor"/><path d="M8 11l8-4M8 13l8 4" stroke="currentColor" stroke-width="2"/></svg></div>
+    <!-- settings -->
+    <div class="tile" style="color:var(--gray-700)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+    <!-- sparkles / AI -->
+    <div class="tile"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3l1.8 4.7L18.5 9.5 13.8 11.3 12 16l-1.8-4.7L5.5 9.5l4.7-1.8L12 3z" fill="currentColor"/><circle cx="18.5" cy="17.5" r="1.6" fill="currentColor"/></svg></div>
+    <div class="sep"></div>
+    <div class="soc" style="background:#03C75A; color:#fff"><img src="../assets/icons/naver.svg" width="16" height="16" style="filter:brightness(0) invert(1)"></div>
+    <div class="soc" style="background:var(--surface-muted); color:var(--gray-700)"><img src="../assets/icons/google.svg" width="22" height="22"></div>
+    <div class="soc" style="background:#FEE500; color:#191600"><img src="../assets/icons/kakao.svg" width="22" height="22"></div>
+  </div>
+  <div class="cap">App UI uses 2px-stroke line icons on a 24px grid (Lucide-compatible). Social marks: Naver, Google, Kakao.</div>
+</body>
+</html>

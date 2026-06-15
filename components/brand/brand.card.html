@@ -1,0 +1,29 @@
+<!-- @dsCard group="Components" viewport="700x250" name="Brand — Mascot" subtitle="Halo & full-body usage" -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin: 0; font-family: var(--font-sans); background: #fff; padding: 24px; color: var(--text-strong); }
+  .row { display:flex; gap:32px; align-items:center; }
+  .halo { width:122px; height:122px; border-radius:50%; background:var(--red-50); display:flex; align-items:center; justify-content:center; }
+  .halo img { width:72%; height:72%; object-fit:contain; }
+  .full { width:140px; height:140px; }
+  .full img { width:100%; height:100%; object-fit:contain; }
+  .copy { max-width:300px; }
+  .h { font-size:20px; font-weight:700; }
+  .p { margin-top:6px; font-size:14px; color:var(--text-body); line-height:1.5; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="halo"><img src="../../assets/mascot-head-happy.png" alt="happy"></div>
+    <div class="full"><img src="../../assets/mascot-happy.png" alt="happy full"></div>
+    <div class="copy">
+      <div class="h">안녕하세요!</div>
+      <div class="p">Use the happy head in a soft halo for onboarding & empty states; the full-body poses for celebrations and reports. Sad moods cover errors.</div>
+    </div>
+  </div>
+</body>
+</html>

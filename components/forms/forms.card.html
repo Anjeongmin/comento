@@ -1,0 +1,50 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Forms — Button & Input" subtitle="Gradient CTA pill, variants, sizes, underline fields" -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin: 0; font-family: var(--font-sans); background: #fff; padding: 24px; color: var(--text-strong); }
+  .wrap { display: flex; gap: 36px; align-items: flex-start; }
+  .col { display: flex; flex-direction: column; gap: 14px; }
+  .lab { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; }
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; border:none; cursor:pointer; font-family:var(--font-sans); line-height:1; }
+  .primary { background:var(--gradient-brand); color:#fff; box-shadow:var(--shadow-fab); }
+  .secondary { background:var(--surface-subtle); color:var(--gray-700); box-shadow:var(--ring-default); }
+  .soft { background:var(--color-primary-soft); color:var(--color-primary); }
+  .ghost { background:transparent; color:var(--color-primary); }
+  .lg { height:56px; padding:0 24px; border-radius:var(--radius-pill); font-size:18px; font-weight:700; }
+  .md { height:46px; padding:0 20px; border-radius:var(--radius-pill); font-size:16px; font-weight:700; }
+  .sm { height:36px; padding:0 14px; border-radius:var(--radius-md); font-size:14px; font-weight:700; }
+  .row { display:flex; gap:10px; align-items:center; }
+  .field { width:230px; display:flex; flex-direction:column; gap:6px; }
+  .cap { font-size:14px; font-weight:500; color:var(--color-primary); }
+  .uline { height:40px; border:none; border-bottom:1.5px solid var(--border-default); font-size:16px; font-family:var(--font-sans); outline:none; background:transparent; }
+  .uline.focus { border-bottom-color: var(--color-primary); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="col">
+      <div class="lab">Variants</div>
+      <button class="btn primary md">다음</button>
+      <button class="btn secondary md">요약 보기</button>
+      <button class="btn soft md">표현 연습하기</button>
+      <button class="btn ghost md">회원가입</button>
+    </div>
+    <div class="col">
+      <div class="lab">Sizes</div>
+      <button class="btn primary lg">리포트 상세 분석 보기</button>
+      <div class="row">
+        <button class="btn primary md">Medium</button>
+        <button class="btn primary sm">Small</button>
+        <button class="btn primary md" style="opacity:.45; cursor:not-allowed">Disabled</button>
+      </div>
+      <div class="lab" style="margin-top:8px">Input · underline</div>
+      <div class="field"><span class="cap">ID</span><input class="uline" placeholder="아이디" /></div>
+      <div class="field"><span class="cap">PASSWORD</span><input class="uline focus" type="password" value="••••••" /></div>
+    </div>
+  </div>
+</body>
+</html>

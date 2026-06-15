@@ -1,0 +1,37 @@
+<!-- @dsCard group="Components" viewport="700x280" name="Data — ListItem & StatTile" subtitle="Call rows + hero stat panels" -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin: 0; font-family: var(--font-sans); background: #fff; padding: 24px; color: var(--text-strong); }
+  .list { max-width:380px; }
+  .li { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 4px; border-bottom:1px solid var(--border-subtle); }
+  .li:last-child { border-bottom:none; }
+  .left { display:flex; align-items:center; gap:12px; }
+  .tile { width:48px; height:48px; border-radius:12px; background:var(--surface-muted); color:var(--color-primary); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .ti { font-size:17px; font-weight:700; }
+  .me { font-size:14px; color:var(--text-muted); }
+  .chip { border:none; padding:8px 12px; border-radius:var(--radius-xs); background:var(--surface-subtle); box-shadow:var(--ring-default); font-size:12px; font-weight:700; color:var(--gray-700); font-family:var(--font-sans); }
+  .stats { display:flex; gap:10px; max-width:320px; margin-top:8px; }
+  .stat { flex:1; box-sizing:border-box; display:flex; flex-direction:column; gap:10px; padding:12px 14px; border-radius:var(--radius-sm); background:var(--red-400); box-shadow:var(--shadow-float); color:#fff; }
+  .sl { display:flex; align-items:center; gap:8px; font-size:14px; font-weight:500; }
+  .sv { font-size:18px; font-weight:700; }
+  .lab { font-size:11px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px; }
+  svg { display:block; }
+</style>
+</head>
+<body>
+  <div class="lab">ListItem</div>
+  <div class="list">
+    <div class="li"><div class="left"><div class="tile"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M6.6 10.8a13 13 0 006.6 6.6l2.2-2.2a1 1 0 011-.24c1.1.37 2.3.57 3.5.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.3a1 1 0 011 1c0 1.2.2 2.4.57 3.5a1 1 0 01-.24 1l-2.2 2.3z" fill="currentColor"/></svg></div><div><div class="ti">이지수 팀장</div><div class="me">오전 11:30 · 05분 12초</div></div></div><button class="chip">요약 보기</button></div>
+    <div class="li"><div class="left"><div class="tile"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M6.6 10.8a13 13 0 006.6 6.6l2.2-2.2a1 1 0 011-.24c1.1.37 2.3.57 3.5.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.3a1 1 0 011 1c0 1.2.2 2.4.57 3.5a1 1 0 01-.24 1l-2.2 2.3z" fill="currentColor"/></svg></div><div><div class="ti">박지훈 대표</div><div class="me">오전 09:15 · 12분 45초</div></div></div><button class="chip">요약 보기</button></div>
+  </div>
+  <div class="lab" style="margin-top:18px">StatTile</div>
+  <div class="stats">
+    <div class="stat"><div class="sl"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M6.6 10.8a13 13 0 006.6 6.6l2.2-2.2a1 1 0 011-.24c1.1.37 2.3.57 3.5.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.3a1 1 0 011 1c0 1.2.2 2.4.57 3.5a1 1 0 01-.24 1l-2.2 2.3z" fill="currentColor"/></svg>오늘 통화</div><div class="sv">12통</div></div>
+    <div class="stat"><div class="sl"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 3l1.8 4.7L18.5 9.5 13.8 11.3 12 16l-1.8-4.7L5.5 9.5l4.7-1.8z" fill="currentColor"/></svg>분석 결과</div><div class="sv" style="font-size:14px">오후 2시 마감</div></div>
+  </div>
+</body>
+</html>

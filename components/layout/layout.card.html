@@ -1,0 +1,51 @@
+<!-- @dsCard group="Components" viewport="700x320" name="Layout — Card, SectionHeader, IconTile" subtitle="Surfaces: plain, brand hero, subtle, tints" -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin: 0; font-family: var(--font-sans); background: var(--surface-subtle); padding: 24px; color: var(--text-strong); }
+  .grid { display:grid; grid-template-columns: 1fr 1fr; gap:16px; max-width:640px; }
+  .card { box-sizing:border-box; border-radius:var(--radius-xl); padding:16px; }
+  .plain { background:#fff; box-shadow:var(--shadow-card-hairline); }
+  .brand { background:var(--gradient-brand); color:#fff; box-shadow:var(--shadow-float); border-radius:var(--radius-2xl); }
+  .subtle { background:var(--surface-subtle); box-shadow:var(--ring-subtle); }
+  .tint { background:var(--red-400); color:#fff; }
+  .sh { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  .t1 { font-size:18px; font-weight:700; }
+  .link { font-size:15px; font-weight:500; color:var(--text-muted); }
+  .muted { color:var(--text-body); font-size:14px; }
+  .tiles { display:flex; gap:10px; margin-top:12px; }
+  .tile { width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; }
+  .m { background:var(--surface-muted); color:var(--color-primary); }
+  .s { background:var(--color-primary-soft); color:var(--color-primary); }
+  .b { background:var(--color-primary); color:#fff; }
+  svg { display:block; }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="card plain">
+      <div class="sh"><span class="t1">최근 통화 목록</span><span class="link">전체보기</span></div>
+      <span class="muted">plain — resting white card with hairline + soft shadow.</span>
+      <div class="tiles">
+        <div class="tile m"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M6.6 10.8a13 13 0 006.6 6.6l2.2-2.2a1 1 0 011-.24c1.1.37 2.3.57 3.5.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.3a1 1 0 011 1c0 1.2.2 2.4.57 3.5a1 1 0 01-.24 1l-2.2 2.3z" fill="currentColor"/></svg></div>
+        <div class="tile s"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/><path d="M5 11a7 7 0 0014 0M12 18v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div class="tile b"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 3l1.8 4.7L18.5 9.5 13.8 11.3 12 16l-1.8-4.7L5.5 9.5l4.7-1.8z" fill="currentColor"/></svg></div>
+      </div>
+    </div>
+    <div class="card brand">
+      <div class="sh"><span class="t1">오늘의 요약</span></div>
+      <span style="opacity:.9; font-size:14px">brand — red gradient hero card.</span>
+    </div>
+    <div class="card subtle">
+      <span class="t1" style="font-size:16px">잘한 점</span>
+      <p class="muted" style="margin:8px 0 0">subtle — gray inset panel for feedback blocks.</p>
+    </div>
+    <div class="card tint">
+      <span style="font-size:15px; font-weight:600">tint — soft red callout for AI summary lines.</span>
+    </div>
+  </div>
+</body>
+</html>

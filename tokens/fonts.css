@@ -1,0 +1,10 @@
+/* ============================================================
+   FONTS — webfont sources
+   The source file uses Inter (Latin/numerals) + Pretendard (Hangul).
+   Both are loaded from CDN here. If you need fully self-hosted
+   binaries, drop .woff2 files in assets/fonts/ and replace these
+   @import lines with @font-face rules.
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css");

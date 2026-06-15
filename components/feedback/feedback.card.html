@@ -1,0 +1,44 @@
+<!-- @dsCard group="Components" viewport="700x260" name="Feedback — Badge & MetricBar" subtitle="Timeline pills + analysis score bars" -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin: 0; font-family: var(--font-sans); background: #fff; padding: 24px; color: var(--text-strong); }
+  .wrap { display:flex; gap:40px; align-items:flex-start; }
+  .col { display:flex; flex-direction:column; gap:14px; }
+  .lab { font-size:11px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.06em; }
+  .badge { display:inline-flex; align-items:center; height:26px; padding:0 10px; border-radius:var(--radius-xs); font-size:13px; font-weight:700; }
+  .solid { background:var(--color-primary); color:#fff; }
+  .soft { background:var(--color-primary-soft); color:var(--color-primary); }
+  .outline { background:var(--surface-subtle); color:var(--gray-700); box-shadow:var(--ring-default); }
+  .coral { background:var(--red-300); color:#fff; }
+  .row { display:flex; gap:8px; align-items:center; }
+  .bars { width:340px; display:flex; flex-direction:column; gap:14px; }
+  .metric { display:flex; flex-direction:column; gap:8px; }
+  .mh { display:flex; justify-content:space-between; align-items:baseline; }
+  .mn { font-size:16px; font-weight:700; }
+  .track { height:10px; border-radius:var(--radius-pill); background:var(--track-bg); overflow:hidden; }
+  .fill { height:100%; border-radius:var(--radius-pill); background:var(--color-primary); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="col">
+      <div class="lab">Badges</div>
+      <div class="row"><span class="badge solid">부정적 기류</span><span class="badge solid">긍정적 전환</span></div>
+      <div class="row"><span class="badge soft">Friendly</span><span class="badge coral">Anxious</span></div>
+      <div class="row"><span class="badge outline">자막</span><span class="badge outline">02:05</span></div>
+    </div>
+    <div class="col">
+      <div class="lab">MetricBar</div>
+      <div class="bars">
+        <div class="metric"><div class="mh"><span class="mn">친절함 (Friendly)</span><span class="mn">70%</span></div><div class="track"><div class="fill" style="width:70%"></div></div></div>
+        <div class="metric"><div class="mh"><span class="mn">차분함 (Calm)</span><span class="mn">20%</span></div><div class="track"><div class="fill" style="width:20%"></div></div></div>
+        <div class="metric"><div class="mh"><span class="mn">침묵</span></div><div class="track"><div class="fill" style="width:62%"></div></div></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

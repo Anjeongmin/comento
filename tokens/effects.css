@@ -1,0 +1,29 @@
+/* ============================================================
+   EFFECTS — shadows, hairlines, motion
+   The system leans on soft floating shadows + 1px inset hairlines
+   rather than hard borders. Two real elevations: resting card and
+   floating element (FAB / sheet / chips on color).
+   ============================================================ */
+
+:root {
+  /* Hairline drawn as inset ring so it never adds layout box */
+  --ring-subtle:  inset 0 0 0 1px var(--border-subtle);
+  --ring-default: inset 0 0 0 1px var(--border-default);
+
+  /* Elevations */
+  --shadow-card:     0 1px 2px rgba(0,0,0,0.05);
+  --shadow-card-hairline: inset 0 0 0 1px var(--border-subtle), 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-float:    0 2px 12px rgba(120,120,120,0.25);
+  --shadow-elevated: 0 8px 24px rgba(17,24,39,0.12);
+  --shadow-fab:      0 6px 20px rgba(255,54,57,0.45);
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast:   140ms;
+  --dur-normal: 220ms;
+  --dur-slow:   360ms;
+
+  /* Press feedback */
+  --press-scale: 0.97;
+}

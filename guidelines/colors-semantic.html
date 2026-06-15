@@ -1,0 +1,30 @@
+<!-- @dsCard group="Colors" viewport="700x230" name="Semantic roles" subtitle="Aliases to reach for in components" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; font-family: var(--font-sans); background: #fff; padding: 22px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .item { display: flex; align-items: center; gap: 10px; }
+  .chip { width: 36px; height: 36px; border-radius: 9px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); flex-shrink: 0; }
+  .meta { display: flex; flex-direction: column; }
+  .nm { font-size: 12px; font-weight: 700; color: var(--gray-800); }
+  .tk { font-size: 10.5px; color: var(--gray-500); font-family: ui-monospace, monospace; }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="item"><div class="chip" style="background:var(--color-primary)"></div><div class="meta"><span class="nm">primary</span><span class="tk">--color-primary</span></div></div>
+    <div class="item"><div class="chip" style="background:var(--color-primary-hover)"></div><div class="meta"><span class="nm">primary-hover</span><span class="tk">--color-primary-hover</span></div></div>
+    <div class="item"><div class="chip" style="background:var(--color-primary-soft)"></div><div class="meta"><span class="nm">primary-soft</span><span class="tk">--color-primary-soft</span></div></div>
+    <div class="item"><div class="chip" style="background:var(--text-strong)"></div><div class="meta"><span class="nm">text-strong</span><span class="tk">--text-strong</span></div></div>
+    <div class="item"><div class="chip" style="background:var(--text-body)"></div><div class="meta"><span class="nm">text-body</span><span class="tk">--text-body</span></div></div>
+    <div class="item"><div class="chip" style="background:var(--text-muted)"></div><div class="meta"><span class="nm">text-muted</span><span class="tk">--text-muted</span></div></div>
+    <div class="item"><div class="chip" style="background:var(--surface-subtle)"></div><div class="meta"><span class="nm">surface-subtle</span><span class="tk">--surface-subtle</span></div></div>
+    <div class="item"><div class="chip" style="background:var(--surface-muted)"></div><div class="meta"><span class="nm">surface-muted</span><span class="tk">--surface-muted</span></div></div>
+    <div class="item"><div class="chip" style="background:var(--border-default)"></div><div class="meta"><span class="nm">border-default</span><span class="tk">--border-default</span></div></div>
+  </div>
+</body>
+</html>

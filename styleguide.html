@@ -1,0 +1,263 @@
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="#FF3639"/>
+    <text x="50" y="64" font-size="46" font-family="Inter,sans-serif" font-weight="800" fill="#fff" text-anchor="middle">DS</text>
+  </svg>
+</template>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI 통화 분석 · 디자인 시스템</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: var(--font-sans); background: #f4f5f7; color: var(--text-strong); -webkit-font-smoothing: antialiased; }
+  .page { max-width: 1080px; margin: 0 auto; padding: 0 32px 100px; }
+  /* cover */
+  .cover { background: var(--gradient-brand); border-radius: 0 0 36px 36px; padding: 56px 48px 60px; color: #fff; display: flex; align-items: center; gap: 32px; box-shadow: var(--shadow-float); margin-bottom: 56px; }
+  .cover img { width: 168px; flex-shrink: 0; filter: drop-shadow(0 12px 24px rgba(0,0,0,.25)); }
+  .cover h1 { font-size: 46px; font-weight: 800; margin: 0 0 10px; letter-spacing: -0.02em; }
+  .cover p { font-size: 18px; margin: 0; opacity: .92; line-height: 1.55; max-width: 520px; }
+  .cover .kic { display:inline-block; margin-top:18px; font-size:13px; font-weight:700; background:rgba(255,255,255,.22); padding:7px 14px; border-radius:var(--radius-pill); }
+  /* section */
+  section { margin-bottom: 56px; }
+  .shead { display: flex; align-items: baseline; gap: 14px; margin-bottom: 22px; padding-bottom: 12px; border-bottom: 2px solid var(--gray-200); }
+  .shead .n { font-size: 13px; font-weight: 800; color: var(--color-primary); font-family: ui-monospace, monospace; }
+  .shead h2 { font-size: 26px; font-weight: 800; margin: 0; letter-spacing: -0.01em; }
+  .shead .d { font-size: 14px; color: var(--text-muted); margin-left: auto; }
+  .panel { background: #fff; border-radius: var(--radius-xl); padding: 28px; box-shadow: var(--shadow-card-hairline); }
+  .grid { display: grid; gap: 16px; }
+  .lab { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 14px; }
+  /* color */
+  .swatches { display: flex; gap: 12px; flex-wrap: wrap; }
+  .sw { display: flex; flex-direction: column; gap: 7px; }
+  .chip { width: 96px; height: 66px; border-radius: 12px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.06); }
+  .chip.sm { width: 64px; }
+  .nm { font-size: 12px; font-weight: 700; }
+  .hex { font-size: 10.5px; color: var(--text-muted); font-family: ui-monospace, monospace; }
+  /* type */
+  .trow { display: flex; align-items: baseline; gap: 18px; padding: 11px 0; border-bottom: 1px solid var(--border-subtle); }
+  .trow:last-child { border: none; }
+  .ttag { width: 96px; flex-shrink: 0; font-size: 11px; font-weight: 700; color: var(--text-muted); font-family: ui-monospace, monospace; }
+  .tspec { width: 86px; flex-shrink: 0; font-size: 11px; color: var(--gray-400); }
+  /* tokens row */
+  .toks { display: flex; gap: 18px; align-items: flex-end; flex-wrap: wrap; }
+  .tk { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+  .tk .nm2 { font-size: 11px; font-weight: 700; }
+  .tk .px { font-size: 10px; color: var(--text-muted); }
+  /* component bits */
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; border:none; cursor:pointer; font-family:var(--font-sans); line-height:1; }
+  .primary { background:var(--gradient-brand); color:#fff; box-shadow:var(--shadow-fab); }
+  .secondary { background:var(--surface-subtle); color:var(--gray-700); box-shadow:var(--ring-default); }
+  .soft { background:var(--color-primary-soft); color:var(--color-primary); }
+  .ghost { background:transparent; color:var(--color-primary); }
+  .lg { height:56px; padding:0 24px; border-radius:var(--radius-pill); font-size:18px; font-weight:700; }
+  .md { height:46px; padding:0 20px; border-radius:var(--radius-pill); font-size:16px; font-weight:700; }
+  .smb { height:36px; padding:0 14px; border-radius:var(--radius-md); font-size:14px; font-weight:700; }
+  .badge { display:inline-flex; align-items:center; height:26px; padding:0 10px; border-radius:var(--radius-xs); font-size:13px; font-weight:700; }
+  .row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .cols { display:grid; grid-template-columns: 1fr 1fr; gap:24px; }
+  .metric { margin-bottom:14px; }
+  .mh { display:flex; justify-content:space-between; margin-bottom:8px; font-size:16px; font-weight:700; }
+  .track { height:10px; border-radius:var(--radius-pill); background:var(--track-bg); overflow:hidden; }
+  .fill { height:100%; border-radius:var(--radius-pill); background:var(--color-primary); }
+  .li { display:flex; align-items:center; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--border-subtle); }
+  .li:last-child { border:none; }
+  .tile { width:48px; height:48px; border-radius:12px; background:var(--surface-muted); color:var(--color-primary); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .field { display:flex; flex-direction:column; gap:6px; max-width:280px; }
+  .cap { font-size:14px; font-weight:500; color:var(--color-primary); }
+  .uline { height:40px; border:none; border-bottom:1.5px solid var(--border-default); font-size:16px; outline:none; background:transparent; font-family:var(--font-sans); }
+  svg { display:block; }
+  .mascots { display:flex; gap:28px; align-items:flex-end; flex-wrap:wrap; }
+  .halo { width:120px; height:120px; border-radius:50%; background:var(--red-50); display:flex; align-items:center; justify-content:center; }
+  .halo img { width:72%; }
+  .mfull { width:128px; }
+  .mfull img { width:100%; }
+  .mc { display:flex; flex-direction:column; gap:10px; align-items:center; }
+  .iconrow { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+  .itile { width:54px; height:54px; border-radius:12px; background:var(--surface-muted); color:var(--color-primary); display:flex; align-items:center; justify-content:center; }
+</style>
+</head>
+<body>
+  <div class="cover">
+    <img src="assets/mascot-happy.png" alt="mascot" />
+    <div>
+      <h1>AI 통화 분석<br/>디자인 시스템</h1>
+      <p>통화를 녹음·분석해 더 나은 대화를 코칭하는 한국어 모바일 앱의 디자인 시스템. 단일 레드 브랜드, 친근한 둥근 카드, Inter + Pretendard 타이포, 그리고 토마토 마스코트.</p>
+      <span class="kic">#FF3639 · Inter + Pretendard · Tomato Mascot</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <!-- COLORS -->
+    <section>
+      <div class="shead"><span class="n">01</span><h2>Colors</h2><span class="d">단일 브랜드 레드 + 쿨 그레이 램프</span></div>
+      <div class="panel" style="display:flex;flex-direction:column;gap:28px">
+        <div>
+          <p class="lab">Brand red scale</p>
+          <div class="swatches">
+            <div class="sw"><div class="chip" style="background:var(--red-50)"></div><span class="nm">red-50</span><span class="hex">#FFF1F1</span></div>
+            <div class="sw"><div class="chip" style="background:var(--red-100)"></div><span class="nm">red-100</span><span class="hex">#FFD5D5</span></div>
+            <div class="sw"><div class="chip" style="background:var(--red-200)"></div><span class="nm">red-200</span><span class="hex">#FFB4B4</span></div>
+            <div class="sw"><div class="chip" style="background:var(--red-300)"></div><span class="nm">red-300</span><span class="hex">#F8686A</span></div>
+            <div class="sw"><div class="chip" style="background:var(--red-400)"></div><span class="nm">red-400</span><span class="hex">#FF6363</span></div>
+            <div class="sw"><div class="chip" style="background:var(--red-500);box-shadow:0 0 0 2px var(--red-500),inset 0 0 0 2px #fff"></div><span class="nm">red-500 ★</span><span class="hex">#FF3639</span></div>
+            <div class="sw"><div class="chip" style="background:var(--red-600)"></div><span class="nm">red-600</span><span class="hex">#FF494C</span></div>
+            <div class="sw"><div class="chip" style="background:var(--red-700)"></div><span class="nm">red-700</span><span class="hex">#EF0000</span></div>
+          </div>
+        </div>
+        <div>
+          <p class="lab">Neutral gray ramp</p>
+          <div class="swatches">
+            <div class="sw"><div class="chip sm" style="background:var(--gray-50)"></div><span class="nm">50</span><span class="hex">F9FAFB</span></div>
+            <div class="sw"><div class="chip sm" style="background:var(--gray-100)"></div><span class="nm">100</span><span class="hex">F3F4F6</span></div>
+            <div class="sw"><div class="chip sm" style="background:var(--gray-200)"></div><span class="nm">200</span><span class="hex">E5E7EB</span></div>
+            <div class="sw"><div class="chip sm" style="background:var(--gray-300)"></div><span class="nm">300</span><span class="hex">D1D5DB</span></div>
+            <div class="sw"><div class="chip sm" style="background:var(--gray-400)"></div><span class="nm">400</span><span class="hex">9CA3AF</span></div>
+            <div class="sw"><div class="chip sm" style="background:var(--gray-500)"></div><span class="nm">500</span><span class="hex">6B7280</span></div>
+            <div class="sw"><div class="chip sm" style="background:var(--gray-600)"></div><span class="nm">600</span><span class="hex">4B5563</span></div>
+            <div class="sw"><div class="chip sm" style="background:var(--gray-700)"></div><span class="nm">700</span><span class="hex">374151</span></div>
+            <div class="sw"><div class="chip sm" style="background:var(--gray-800)"></div><span class="nm">800</span><span class="hex">1F2937</span></div>
+            <div class="sw"><div class="chip sm" style="background:var(--gray-900)"></div><span class="nm">900</span><span class="hex">111827</span></div>
+          </div>
+        </div>
+        <div>
+          <p class="lab">Gradient</p>
+          <div style="display:flex;gap:16px">
+            <div style="flex:1;height:80px;border-radius:16px;background:var(--gradient-brand);box-shadow:var(--shadow-fab)"></div>
+            <div style="flex:1;height:80px;border-radius:16px;background:var(--gradient-brand-soft)"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TYPE -->
+    <section>
+      <div class="shead"><span class="n">02</span><h2>Typography</h2><span class="d">Inter (Latin/숫자) + Pretendard (한글)</span></div>
+      <div class="panel">
+        <div class="trow"><span class="ttag">display</span><span class="tspec">24 / 700</span><span style="font:var(--text-display)">12통 분석 완료</span></div>
+        <div class="trow"><span class="ttag">h1</span><span class="tspec">20 / 700</span><span style="font:var(--text-h1)">안녕하세요, 김지원님</span></div>
+        <div class="trow"><span class="ttag">h2</span><span class="tspec">18 / 700</span><span style="font:var(--text-h2)">최근 통화 목록</span></div>
+        <div class="trow"><span class="ttag">h3</span><span class="tspec">17 / 700</span><span style="font:var(--text-h3)">대화 팁: 신뢰도를 높이는 마무리</span></div>
+        <div class="trow"><span class="ttag">body</span><span class="tspec">16 / 400</span><span style="font:var(--text-body)">AI가 당신의 통화를 분석합니다.</span></div>
+        <div class="trow"><span class="ttag">label</span><span class="tspec">14 / 500</span><span style="font:var(--text-label)">부족한 표현 연습하기</span></div>
+        <div class="trow"><span class="ttag">caption</span><span class="tspec">12 / 500</span><span style="font:var(--text-caption)">2026년 06월 02일 화요일</span></div>
+      </div>
+    </section>
+
+    <!-- SPACING -->
+    <section>
+      <div class="shead"><span class="n">03</span><h2>Spacing · Radii · Elevation</h2></div>
+      <div class="panel" style="display:flex;flex-direction:column;gap:30px">
+        <div>
+          <p class="lab">Radii</p>
+          <div class="toks">
+            <div class="tk"><div style="width:72px;height:52px;background:var(--surface-subtle);box-shadow:inset 0 0 0 1.5px var(--red-400);border-radius:var(--radius-xs)"></div><span class="nm2">xs</span><span class="px">8</span></div>
+            <div class="tk"><div style="width:72px;height:52px;background:var(--surface-subtle);box-shadow:inset 0 0 0 1.5px var(--red-400);border-radius:var(--radius-md)"></div><span class="nm2">md</span><span class="px">12</span></div>
+            <div class="tk"><div style="width:72px;height:52px;background:var(--surface-subtle);box-shadow:inset 0 0 0 1.5px var(--red-400);border-radius:var(--radius-lg)"></div><span class="nm2">lg</span><span class="px">16</span></div>
+            <div class="tk"><div style="width:72px;height:52px;background:var(--surface-subtle);box-shadow:inset 0 0 0 1.5px var(--red-400);border-radius:var(--radius-xl)"></div><span class="nm2">xl</span><span class="px">20</span></div>
+            <div class="tk"><div style="width:72px;height:52px;background:var(--surface-subtle);box-shadow:inset 0 0 0 1.5px var(--red-400);border-radius:var(--radius-2xl)"></div><span class="nm2">2xl</span><span class="px">24</span></div>
+            <div class="tk"><div style="width:96px;height:52px;background:var(--surface-subtle);box-shadow:inset 0 0 0 1.5px var(--red-400);border-radius:var(--radius-pill)"></div><span class="nm2">pill</span><span class="px">∞</span></div>
+          </div>
+        </div>
+        <div>
+          <p class="lab">Elevation</p>
+          <div class="toks" style="gap:28px">
+            <div class="tk"><div style="width:110px;height:64px;border-radius:16px;background:#fff;box-shadow:var(--ring-subtle)"></div><span class="nm2">hairline</span></div>
+            <div class="tk"><div style="width:110px;height:64px;border-radius:16px;background:#fff;box-shadow:var(--shadow-card-hairline)"></div><span class="nm2">resting card</span></div>
+            <div class="tk"><div style="width:110px;height:64px;border-radius:16px;background:#fff;box-shadow:var(--shadow-float)"></div><span class="nm2">floating</span></div>
+            <div class="tk"><div style="width:64px;height:64px;border-radius:50%;background:var(--gradient-brand);box-shadow:var(--shadow-fab)"></div><span class="nm2">FAB glow</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ICONOGRAPHY / BRAND -->
+    <section>
+      <div class="shead"><span class="n">04</span><h2>Brand &amp; Iconography</h2><span class="d">토마토 마스코트 · 2px 라인 아이콘</span></div>
+      <div class="panel" style="display:flex;flex-direction:column;gap:28px">
+        <div>
+          <p class="lab">Mascot</p>
+          <div class="mascots">
+            <div class="mc"><div class="halo"><img src="assets/mascot-head-happy.png"></div><span class="nm">head · happy</span></div>
+            <div class="mc"><div class="halo" style="background:var(--gray-100)"><img src="assets/mascot-head-sad.png"></div><span class="nm">head · sad</span></div>
+            <div class="mc"><div class="mfull"><img src="assets/mascot-happy.png"></div><span class="nm">full · happy</span></div>
+            <div class="mc"><div class="mfull"><img src="assets/mascot-sad.png"></div><span class="nm">full · sad</span></div>
+          </div>
+        </div>
+        <div>
+          <p class="lab">Icons &amp; social</p>
+          <div class="iconrow">
+            <div class="itile"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M6.6 10.8a13 13 0 006.6 6.6l2.2-2.2a1 1 0 011-.24c1.1.37 2.3.57 3.5.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.3a1 1 0 011 1c0 1.2.2 2.4.57 3.5a1 1 0 01-.24 1l-2.2 2.3z" fill="currentColor"/></svg></div>
+            <div class="itile"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/><path d="M5 11a7 7 0 0014 0M12 18v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <div class="itile"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="6" cy="12" r="2.4" fill="currentColor"/><circle cx="18" cy="6" r="2.4" fill="currentColor"/><circle cx="18" cy="18" r="2.4" fill="currentColor"/><path d="M8 11l8-4M8 13l8 4" stroke="currentColor" stroke-width="2"/></svg></div>
+            <div class="itile" style="color:var(--gray-700)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5 5l2.1 2.1M16.9 16.9L19 19M19 5l-2.1 2.1M7.1 16.9L5 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <div class="itile"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 3l1.8 4.7L18.5 9.5 13.8 11.3 12 16l-1.8-4.7L5.5 9.5l4.7-1.8z" fill="currentColor"/></svg></div>
+            <div style="width:18px"></div>
+            <div class="itile" style="background:#03C75A;color:#fff;border-radius:50%;width:48px;height:48px"><img src="assets/icons/naver.svg" width="16" style="filter:brightness(0) invert(1)"></div>
+            <div class="itile" style="background:var(--surface-muted);border-radius:50%;width:48px;height:48px"><img src="assets/icons/google.svg" width="22"></div>
+            <div class="itile" style="background:#FEE500;border-radius:50%;width:48px;height:48px"><img src="assets/icons/kakao.svg" width="22"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPONENTS -->
+    <section>
+      <div class="shead"><span class="n">05</span><h2>Components</h2><span class="d">12 primitives</span></div>
+      <div class="panel" style="display:flex;flex-direction:column;gap:30px">
+        <div>
+          <p class="lab">Buttons</p>
+          <div class="row">
+            <button class="btn primary md">다음</button>
+            <button class="btn secondary md">요약 보기</button>
+            <button class="btn soft md">표현 연습하기</button>
+            <button class="btn ghost md">회원가입</button>
+            <button class="btn primary smb">Small</button>
+            <button class="btn primary md" style="opacity:.45">Disabled</button>
+          </div>
+        </div>
+        <div class="cols">
+          <div>
+            <p class="lab">Badges</p>
+            <div class="row" style="margin-bottom:18px">
+              <span class="badge" style="background:var(--color-primary);color:#fff">부정적 기류</span>
+              <span class="badge" style="background:var(--color-primary);color:#fff">긍정적 전환</span>
+              <span class="badge" style="background:var(--color-primary-soft);color:var(--color-primary)">Friendly</span>
+              <span class="badge" style="background:var(--surface-subtle);color:var(--gray-700);box-shadow:var(--ring-default)">02:05</span>
+            </div>
+            <p class="lab">Input</p>
+            <div class="field"><span class="cap">ID</span><input class="uline" placeholder="아이디"></div>
+            <div class="field" style="margin-top:12px"><span class="cap">PASSWORD</span><input class="uline" style="border-bottom-color:var(--color-primary)" type="password" value="••••••"></div>
+          </div>
+          <div>
+            <p class="lab">MetricBar</p>
+            <div class="metric"><div class="mh"><span>친절함 (Friendly)</span><span>70%</span></div><div class="track"><div class="fill" style="width:70%"></div></div></div>
+            <div class="metric"><div class="mh"><span>차분함 (Calm)</span><span>20%</span></div><div class="track"><div class="fill" style="width:20%"></div></div></div>
+            <div class="metric"><div class="mh"><span>흐름</span></div><div class="track"><div class="fill" style="width:82%"></div></div></div>
+          </div>
+        </div>
+        <div class="cols">
+          <div>
+            <p class="lab">Cards</p>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="border-radius:var(--radius-xl);background:#fff;box-shadow:var(--shadow-card-hairline);padding:16px"><b>plain</b> — 흰 카드 + 헤어라인</div>
+              <div style="border-radius:var(--radius-2xl);background:var(--gradient-brand);color:#fff;box-shadow:var(--shadow-float);padding:16px"><b>brand</b> — 레드 그라데이션 히어로</div>
+              <div style="border-radius:var(--radius-lg);background:var(--surface-subtle);padding:16px"><b>subtle</b> — 그레이 인셋 패널</div>
+            </div>
+          </div>
+          <div>
+            <p class="lab">List items</p>
+            <div class="li"><div class="row"><div class="tile"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M6.6 10.8a13 13 0 006.6 6.6l2.2-2.2a1 1 0 011-.24c1.1.37 2.3.57 3.5.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.3a1 1 0 011 1c0 1.2.2 2.4.57 3.5a1 1 0 01-.24 1l-2.2 2.3z" fill="currentColor"/></svg></div><div><div style="font-size:17px;font-weight:700">이지수 팀장</div><div style="font-size:14px;color:var(--text-muted)">오전 11:30 · 05분 12초</div></div></div><button class="btn secondary smb">요약 보기</button></div>
+            <div class="li"><div class="row"><div class="tile"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M6.6 10.8a13 13 0 006.6 6.6l2.2-2.2a1 1 0 011-.24c1.1.37 2.3.57 3.5.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.3a1 1 0 011 1c0 1.2.2 2.4.57 3.5a1 1 0 01-.24 1l-2.2 2.3z" fill="currentColor"/></svg></div><div><div style="font-size:17px;font-weight:700">박지훈 대표</div><div style="font-size:14px;color:var(--text-muted)">오전 09:15 · 12분 45초</div></div></div><button class="btn secondary smb">요약 보기</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <p style="text-align:center;color:var(--text-muted);font-size:13px;margin-top:40px">전체 컴포넌트 코드·토큰·인터랙티브 UI 킷은 디자인 시스템 패키지에 포함되어 있습니다.</p>
+  </div>
+</body>
+</html>

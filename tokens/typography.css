@@ -1,0 +1,43 @@
+/* ============================================================
+   TYPOGRAPHY
+   Inter for Latin & numerals, Pretendard for Hangul — one shared
+   stack so a single class renders mixed KO/EN strings correctly.
+   Roboto appears in the source for some headings; folded into the
+   stack as a fallback. Tight tracking on small text (-0.5%).
+   ============================================================ */
+
+:root {
+  --font-sans: "Inter", "Pretendard", "Apple SD Gothic Neo", "Roboto",
+               -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
+               "Malgun Gothic", sans-serif;
+
+  /* Weights */
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semibold: 600;
+  --fw-bold:    700;
+
+  /* Type scale (size / line-height) — mobile-first */
+  --text-display: 700 24px/30px var(--font-sans);  /* big stat numbers   */
+  --text-h1:      700 20px/28px var(--font-sans);  /* screen / card title */
+  --text-h2:      700 18px/28px var(--font-sans);  /* section heading     */
+  --text-h3:      700 17px/24px var(--font-sans);  /* list item title     */
+  --text-body:    400 16px/24px var(--font-sans);  /* default body        */
+  --text-body-sm: 400 15px/22px var(--font-sans);  /* dense body          */
+  --text-label:   500 14px/18px var(--font-sans);  /* labels, buttons     */
+  --text-caption: 500 12px/16px var(--font-sans);  /* meta, chips         */
+  --text-micro:   500 10px/14px var(--font-sans);  /* tab labels, tags    */
+
+  /* Individual size tokens (when composing manually) */
+  --size-display: 24px;
+  --size-h1: 20px;
+  --size-h2: 18px;
+  --size-h3: 17px;
+  --size-body: 16px;
+  --size-body-sm: 15px;
+  --size-label: 14px;
+  --size-caption: 12px;
+  --size-micro: 10px;
+
+  --tracking-tight: -0.005em;  /* applied to captions / small UI text */
+}

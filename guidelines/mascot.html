@@ -1,0 +1,26 @@
+<!-- @dsCard group="Brand" viewport="700x260" name="Mascot — Tomato" subtitle="Headset tomato · happy & sad, head & full-body" -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; font-family: var(--font-sans); background: #fff; padding: 24px; }
+  .row { display: flex; gap: 28px; align-items: flex-end; }
+  .sw { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+  .halo { width: 132px; height: 132px; border-radius: 50%; background: var(--red-50); display: flex; align-items: center; justify-content: center; }
+  .halo img { width: 72%; height: 72%; object-fit: contain; }
+  .plain { width: 150px; height: 150px; display: flex; align-items: flex-end; justify-content: center; }
+  .plain img { width: 100%; height: 100%; object-fit: contain; }
+  .nm { font-size: 12px; font-weight: 700; color: var(--gray-700); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="sw"><div class="halo"><img src="../assets/mascot-head-happy.png" alt="happy head"></div><div class="nm">head · happy</div></div>
+    <div class="sw"><div class="halo" style="background:var(--gray-100)"><img src="../assets/mascot-head-sad.png" alt="sad head"></div><div class="nm">head · sad</div></div>
+    <div class="sw"><div class="plain"><img src="../assets/mascot-happy.png" alt="happy"></div><div class="nm">full · happy</div></div>
+    <div class="sw"><div class="plain"><img src="../assets/mascot-sad.png" alt="sad"></div><div class="nm">full · sad</div></div>
+  </div>
+</body>
+</html>
